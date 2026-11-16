@@ -1,0 +1,58 @@
+[
+  {
+    "id": "suomi",
+    "label": "Yle Radio Suomi",
+    "speech": "Radio Suomi",
+    "url": "https://icecast.live.yle.fi/radio/YleRS/icecast.audio",
+    "aliases": ["suomi", "radio suomi", "yle radio suomi"]
+  },
+  {
+    "id": "one",
+    "label": "Yle Radio 1",
+    "speech": "Yle Radio One",
+    "url": "https://icecast.live.yle.fi/radio/YleRadio1/icecast.audio",
+    "aliases": ["one", "1", "radio one", "radio 1", "yle radio one", "yle radio 1"]
+  },
+  {
+    "id": "ylex",
+    "label": "YleX",
+    "speech": "Yle X",
+    "url": "https://icecast.live.yle.fi/radio/YleX/icecast.audio",
+    "aliases": ["radio x", "ylex", "yle x", "y l e x"]
+  },
+  {
+    "id": "classical",
+    "label": "Yle Klassinen",
+    "speech": "Yle classical radio",
+    "url": "https://icecast.live.yle.fi/radio/YleKlassinen/icecast.audio",
+    "aliases": ["classical", "classical radio", "klassinen", "yle klassinen", "yle classical"]
+  },
+  {
+    "id": "vega",
+    "label": "Yle Vega",
+    "speech": "Yle Vega",
+    "url": "https://icecast.live.yle.fi/radio/YleVega/icecast.audio",
+    "aliases": ["vega", "yle vega"]
+  },
+  {
+    "id": "x3m",
+    "label": "Yle X3M",
+    "speech": "Yle X three M",
+    "url": "https://icecast.live.yle.fi/radio/YleX3M/icecast.audio",
+    "aliases": ["x3m", "yle x3m", "x three m", "x 3 m", "yle x three m"]
+  },
+  {
+    "id": "sami",
+    "label": "Yle Sámi Radio",
+    "speech": "Yle Sami Radio",
+    "url": "https://icecast.live.yle.fi/radio/YleSami/icecast.audio",
+    "aliases": ["sami", "sámi", "sami radio", "sámi radio", "yle sami radio", "yle sámi radio"]
+  },
+  {
+    "id": "lapland",
+    "label": "Yle Radio Suomi Lappi",
+    "speech": "Radio Suomi Lapland",
+    "url": "https://icecast.live.yle.fi/radio/YleRovaniemi/icecast.audio",
+    "aliases": ["lapland", "lapland radio", "lappi", "rovaniemi", "lapin radio", "yle lapin radio", "yle rovaniemi", "yle radio suomi lappi", "yle radio suomi rovaniemi", "radio suomi lapland"]
+  }
+]
