@@ -1,0 +1,20 @@
+# Local ASK credentials, deployment state, and machine-specific configuration
+.ask/
+ask-resources.json
+.aws/
+.env
+.env.*
+!.env.example
+
+# Dependencies and generated files
+node_modules/
+coverage/
+*.log
+*.zip
+*.bundle
+
+# Editor and operating-system files
+.DS_Store
+.idea/
+.vscode/
+*.swp

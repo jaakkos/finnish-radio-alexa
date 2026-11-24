@@ -1,0 +1,185 @@
+{
+  "interactionModel": {
+    "languageModel": {
+      "invocationName": "finnish radio",
+      "intents": [
+        {
+          "name": "PlayStationIntent",
+          "slots": [
+            {
+              "name": "station",
+              "type": "STATION"
+            }
+          ],
+          "samples": [
+            "play {station}",
+            "listen to {station}",
+            "start {station}",
+            "switch to {station}",
+            "{station}"
+          ]
+        },
+        {
+          "name": "AMAZON.CancelIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.StopIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.HelpIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.FallbackIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.PauseIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.ResumeIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.NextIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.PreviousIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.StartOverIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.RepeatIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.LoopOnIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.LoopOffIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.ShuffleOnIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.ShuffleOffIntent",
+          "samples": []
+        }
+      ],
+      "types": [
+        {
+          "name": "STATION",
+          "values": [
+            {
+              "id": "suomi",
+              "name": {
+                "value": "radio suomi",
+                "synonyms": [
+                  "Yle Radio Suomi",
+                  "suomi"
+                ]
+              }
+            },
+            {
+              "id": "one",
+              "name": {
+                "value": "radio one",
+                "synonyms": [
+                  "Yle Radio 1",
+                  "one",
+                  "1",
+                  "radio 1",
+                  "yle radio one"
+                ]
+              }
+            },
+            {
+              "id": "ylex",
+              "name": {
+                "value": "radio x",
+                "synonyms": [
+                  "YleX",
+                  "yle x",
+                  "y l e x"
+                ]
+              }
+            },
+            {
+              "id": "classical",
+              "name": {
+                "value": "classical",
+                "synonyms": [
+                  "Yle Klassinen",
+                  "classical radio",
+                  "klassinen",
+                  "yle classical"
+                ]
+              }
+            },
+            {
+              "id": "vega",
+              "name": {
+                "value": "vega",
+                "synonyms": [
+                  "Yle Vega"
+                ]
+              }
+            },
+            {
+              "id": "x3m",
+              "name": {
+                "value": "x three m",
+                "synonyms": [
+                  "Yle X3M",
+                  "x3m",
+                  "x 3 m",
+                  "yle x three m"
+                ]
+              }
+            },
+            {
+              "id": "sami",
+              "name": {
+                "value": "sami",
+                "synonyms": [
+                  "Yle Sámi Radio",
+                  "sámi",
+                  "sami radio",
+                  "sámi radio",
+                  "yle sami radio"
+                ]
+              }
+            },
+            {
+              "id": "lapland",
+              "name": {
+                "value": "lapland",
+                "synonyms": [
+                  "Yle Radio Suomi Lappi",
+                  "lapland radio",
+                  "lappi",
+                  "rovaniemi",
+                  "lapin radio",
+                  "yle lapin radio",
+                  "yle rovaniemi",
+                  "yle radio suomi rovaniemi",
+                  "radio suomi lapland"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
