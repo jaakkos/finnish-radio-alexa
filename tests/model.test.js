@@ -6,6 +6,22 @@ const { handler } = require('../lambda');
 const stations = require('../lambda/stations.json');
 const model = require('../skill-package/interactionModels/custom/en-US.json').interactionModel.languageModel;
 
+test('voice model supports listing channels and replying with just a station name', () => {
+  const listIntent = model.intents.find((intent) => intent.name === 'ListStationsIntent');
+  assert.ok(listIntent);
+  for (const sample of [
+    'list channels',
+    'list stations',
+    'what channels are available',
+    'what stations can I listen to',
+    'which radio stations do you have'
+  ]) {
+    assert.ok(listIntent.samples.includes(sample), `Missing listing phrase: ${sample}`);
+  }
+  const playIntent = model.intents.find((intent) => intent.name === 'PlayStationIntent');
+  assert.ok(playIntent.samples.includes('{station}'));
+});
+
 test('voice model and station catalog contain the same unique station IDs', () => {
   const stationType = model.types.find((type) => type.name === 'STATION');
   assert.ok(stationType);

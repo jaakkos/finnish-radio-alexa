@@ -29,13 +29,13 @@ function response(body = {}) {
   return { version: '1.0', response: body };
 }
 
-function say(text, keepListening = false) {
+function say(text, keepListening = false, reprompt = stationPrompt) {
   const body = {
     outputSpeech: { type: 'PlainText', text },
     shouldEndSession: !keepListening
   };
   if (keepListening) {
-    body.reprompt = { outputSpeech: { type: 'PlainText', text: stationPrompt } };
+    body.reprompt = { outputSpeech: { type: 'PlainText', text: reprompt } };
   }
   return response(body);
 }
@@ -158,6 +158,12 @@ exports.handler = async (event) => {
       case 'IntentRequest': {
         const intent = request.intent;
         switch (intent?.name) {
+          case 'ListStationsIntent':
+            return say(
+              `Available stations are ${stations.map((station) => station.speech || station.label).join(', ')}. Which station would you like to play?`,
+              true,
+              'Say the name of the station you would like to play.'
+            );
           case 'PlayStationIntent': {
             const station = resolveStation(intent.slots?.station);
             return station ? play(station, event) : askForStation('I did not recognize that station. ');
@@ -180,7 +186,7 @@ exports.handler = async (event) => {
           case 'AMAZON.ShuffleOffIntent':
             return say('Loop and shuffle are not available for live radio.');
           case 'AMAZON.HelpIntent':
-            return askForStation();
+            return askForStation('You can say list channels to hear the available stations. ');
           case 'AMAZON.FallbackIntent':
           default:
             return askForStation('I did not understand. ');

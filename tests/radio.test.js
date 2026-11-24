@@ -55,6 +55,58 @@ test('launch plays Radio Suomi through the fixed HTTPS stream', async () => {
   assertPlay(await handler(event('LaunchRequest')), 'suomi');
 });
 
+test('listing stations speaks every catalog name in catalog order and asks for a selection', async () => {
+  const result = await handler(intent('ListStationsIntent'));
+  assert.equal(result.version, '1.0');
+  assert.equal(result.response.outputSpeech.type, 'PlainText');
+  const text = result.response.outputSpeech.text;
+  let position = 0;
+  for (const station of stations) {
+    const name = station.speech || station.label;
+    const index = text.indexOf(name, position);
+    assert.ok(index >= position, `Missing or out-of-order station: ${name}`);
+    position = index + name.length;
+  }
+  assert.ok(text.endsWith('Which station would you like to play?'));
+});
+
+test('listing stations keeps listening with a short reprompt and never changes audio', async () => {
+  for (const context of [{}, playing('one'), { System: { device: { supportedInterfaces: {} } } }]) {
+    const result = await handler(intent('ListStationsIntent', undefined, context));
+    assertPrompt(result);
+    assert.deepEqual(result.response.reprompt.outputSpeech, {
+      type: 'PlainText',
+      text: 'Say the name of the station you would like to play.'
+    });
+  }
+});
+
+test('listing automatically includes an added station and falls back to its label without speech', async () => {
+  const station = { id: 'test-station', label: 'Test Station', speech: 'Spoken Test Station' };
+  stations.push(station);
+  try {
+    for (const speech of ['Spoken Test Station', undefined, '']) {
+      station.speech = speech;
+      const result = await handler(intent('ListStationsIntent'));
+      assert.ok(result.response.outputSpeech.text.endsWith(
+        `, ${speech || station.label}. Which station would you like to play?`
+      ));
+    }
+  } finally {
+    stations.pop();
+  }
+});
+
+test('a station-name reply after listing starts the selected stream through PlayStationIntent', async () => {
+  const listRequest = intent('ListStationsIntent', undefined, playing('suomi'));
+  listRequest.session = { new: true, sessionId: 'test-list-session' };
+  assertPrompt(await handler(listRequest));
+
+  const selectionRequest = intent('PlayStationIntent', { value: 'radio one' }, playing('suomi'));
+  selectionRequest.session = { ...listRequest.session, new: false };
+  assertPlay(await handler(selectionRequest), 'one');
+});
+
 test('every station ID, label, and alias selects its own channel', async () => {
   for (const station of stations) {
     for (const name of [station.id, station.label, ...station.aliases]) {
@@ -174,6 +226,7 @@ test('device playback buttons work without a session and never speak', async () 
 });
 
 test('help and fallback invite a station choice; loop and shuffle leave audio untouched', async () => {
+  assert.match((await handler(intent('AMAZON.HelpIntent'))).response.outputSpeech.text, /list channels/);
   for (const name of ['AMAZON.HelpIntent', 'AMAZON.FallbackIntent', 'UnknownIntent']) {
     assertPrompt(await handler(intent(name)));
   }

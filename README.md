@@ -2,7 +2,7 @@
 
 A private Alexa-hosted skill that plays eight Yle radio streams directly on an Echo. Say **“Alexa, open Finnish radio”** to start Yle Radio Suomi.
 
-The radio handler and station URLs are unchanged from the working package. The owner reported that the installed skill works. This repository adds a conventional project layout, local tests, and a GitHub Actions test workflow.
+The owner reported that the installed skill works. This repository includes the radio handler, station catalog, interaction model, local tests, and a GitHub Actions test workflow.
 
 ## Repository status
 
@@ -120,7 +120,7 @@ If a fast-forward fails, inspect the differing commits and resolve the history n
 | Voice phrases, station slot names, or synonyms | `skill-package/interactionModels/custom/en-US.json` |
 | Behavior and voice-model regression checks | `tests/` |
 
-Adding a station or changing its spoken aliases requires updating both the station catalog and the interaction model. The tests check that model names select the intended streams.
+Adding a station or changing its spoken aliases requires updating both the station catalog and the interaction model. The spoken channel list automatically includes every catalog entry in catalog order, using `speech` or falling back to `label`. The tests check that model names select the intended streams.
 
 Amazon uses `master` for the deployed development skill, `dev` for code saved in its console editor, and `prod` for a publicly released version. This personal skill uses the development stage. Keep the working branch named `master` for the commands above.
 
@@ -136,13 +136,14 @@ npm test
 
 There are no npm dependencies to install. The workflow in `.github/workflows/test.yml` runs the same tests for GitHub pushes and pull requests, with read-only repository permissions. It requires no Amazon secrets and does not deploy.
 
-Local tests cover playback responses and consistency between the station catalog and voice model. They do not perform live network checks or substitute for a physical Echo playback test. The eight stream URLs were checked on 16 November 2026; they were not rechecked for this repository conversion.
+Local tests cover playback responses, channel listing and follow-up selection, and consistency between the station catalog and voice model. They do not perform live network checks or substitute for a physical Echo playback test. The eight stream URLs were checked on 16 November 2026; they were not rechecked for this repository conversion.
 
 ## Voice commands
 
-| Say | Station |
+| Say | Result |
 | --- | --- |
 | “Alexa, open Finnish radio” | Yle Radio Suomi |
+| “Alexa, ask Finnish radio to list channels” | Lists all available stations and asks which to play |
 | “Alexa, ask Finnish radio to play radio one” | Yle Radio 1 |
 | “… play radio x” | YleX |
 | “… play classical” | Yle Klassinen |
@@ -150,6 +151,8 @@ Local tests cover playback responses and consistency between the station catalog
 | “… play x three m” | Yle X3M |
 | “… play Sami” | Yle Sámi Radio |
 | “… play Lapland” | Yle Radio Suomi / Lapin Radio |
+
+You can also say “list stations.” After listing the channels, Alexa asks “Which station would you like to play?” Reply with a station name, such as “radio one,” to start playback. Listing channels does not issue a playback or stop command.
 
 Stop, resume, next, and previous are supported. Resume restarts the current live broadcast. Opening the skill always starts Radio Suomi.
 

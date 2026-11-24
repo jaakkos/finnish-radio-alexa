@@ -4,6 +4,16 @@
       "invocationName": "finnish radio",
       "intents": [
         {
+          "name": "ListStationsIntent",
+          "samples": [
+            "list channels",
+            "list stations",
+            "what channels are available",
+            "what stations can I listen to",
+            "which radio stations do you have"
+          ]
+        },
+        {
           "name": "PlayStationIntent",
           "slots": [
             {
